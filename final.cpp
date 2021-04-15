@@ -1,6 +1,7 @@
 #include "mbed.h"
 #include "rtos.h"
 #include <mpr121.h>
+#include "ultrasonic.h"
 
 // Create the interrupt receiver object on pin 26
 InterruptIn interrupt(p26);
@@ -15,12 +16,27 @@ I2C i2c(p9, p10);
 // constructor(i2c object, i2c address of the mpr121)
 Mpr121 mpr121(&i2c, Mpr121::ADD_VSS);
 
-int hold0,hold1,hold2,hold3 = 0; //signal variables for correct password
+bool movement = false; //variables for states
+bool armed = true;
 
-bool movement, pin = false; //variables for states
+//checks distance from sonar
+ void dist(int distance)
+{
+    //code to execute when the distance has changed
+    printf("Distance %d mm\r\n", distance);
+    if(distance <=100){
+        movement = true;
+    }
+}
+
+ultrasonic mu(p6, p7, .1, 1, &dist);    //Set the trigger pin to p6 and the echo pin to p7
+                                        //have updates every .1 seconds and a timeout after 1
+                                        //second, and call dist when the distance changes
 
 //For Testing purposes
-//DigitalOut led1(LED2);
+DigitalOut led1(LED2);
+
+int hold0,hold1,hold2,hold3 = 0; //signal variables for correct password
 
 void fallInterrupt(){
     int key_code=0;
@@ -47,14 +63,19 @@ void fallInterrupt(){
     //Section makes sure that no other values are pressed in between 0486
     
     if ((hold0 == 1) && (hold1 == 1)&& (hold2 == 1) && (hold3 == 1)) {
-        //led1 = 1; 
+        led1 = 1; 
+        armed = false;
     }
 }
 
 int main() {
     interrupt.fall(&fallInterrupt);
     interrupt.mode(PullUp);
-    while(1){
+    mu.startUpdates();//start measuring the distance
+    while(1)
+    {
+        //Do something else here
+        mu.checkDistance();     //call checkDistance() as much as possible, as this is where
+                                //the class checks if dist needs to be called.
     }
-    //Thread t1(touchPad);
 }
