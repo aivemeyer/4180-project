@@ -4,4 +4,4 @@
 + Ran into issue connecting to internet with GTOther
   + Fix: Connected to hotspot   
 + Had to remove original file because it contained confidential information
-  + Contained AWS keys to log into account 
+  + Contained AWS credentials to log in
