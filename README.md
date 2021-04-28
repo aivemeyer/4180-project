@@ -4,7 +4,7 @@ By Kenta Xu, Abi Ivemeyer, Nishalini Shanmugan, Seung Wook Jin
 Figure 1. Our complete setup.</p><br/>*
 
 *<p align="center">![Security System Architecture Diagram](https://github.com/aivemeyer/4180-project/blob/main/images/4180Diagram.JPG)<br/>
-Figure 2. Architecture for Security System.</p><br/>*
+Figure 2. Architecture Diagram for Security System.</p><br/>*
 
 ## Overview
 <p> Our project is a security system on a breadboard that will upload data to the cloud. When turned on, the system will be armed with a constant red light. When motion is detected, the alarm will go off and the light will blink, sending an email notification to the user. IT will continue going off until the passcode is correctly entered, in which the sound stops and the light dims. While the system is on, it will be connected to Amazon Web Services and send distance readings. </p>
@@ -94,8 +94,10 @@ Figure 17. uLCD-pinout.</p><br/>*
 <ol>
 <li>Create IAM Role for a Lambda Function and attach the policy for full access to DynamoDB.</li>
 <li>Create a new DynamoDB table to store station ID (partition key), timestamp (sort key), and sonar distance readings in Python 3.38.</li>
+<li>On AWS Simple Email Services, add and verify your email for sending and receiving the notifications </li>
 <li>Create a new Lambda Function and attach the role created in step 1.</li>
 <li>Download the main.py from this repository’s lambda directory.</li>
+<li>Update the AWS access key, secret access key, region, and table name into main.py. </li>
 <li>Upload the main.py’s code to the Lambda Function.</li>
 <li>For the Lambda Function, create a CloudWatch Events trigger that is scheduled for every minute.</li>
 </ol>
