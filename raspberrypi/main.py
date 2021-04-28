@@ -4,10 +4,10 @@ import boto3
 import serial
 
 #Values to access AWS
-AWS_ACCESS_KEY="AKIASXPIV3TYQ2WTEYCV"
-AWS_SECRET_ACCESS_KEY="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"
-AWS_REGION="us-east-1"
-DYNAMODB_TABLE='4180'
+AWS_ACCESS_KEY="Enter Access Key Here"
+AWS_SECRET_ACCESS_KEY="Enter Secret Access Key Here"
+AWS_REGION="Enter region here"
+DYNAMODB_TABLE='Enter Dynamodb table here'
     
 #accesses dynamodb table on aws   
 dynamodb = boto3.resource('dynamodb', aws_access_key_id=AWS_ACCESS_KEY,
