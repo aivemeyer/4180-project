@@ -57,25 +57,42 @@ Figure 10. uLCD.</p><br/>*
 Figure 11. External 5V source.</p><br/>*
 
 ## Connection
-##Mbed Pin Connections
-Figure 12. mbed-pinout.</p><br/>*
-As shown in figure 3, our mbed is grounded, and Vout is 3.3 V. Pin 9 of the mbed is connected to the SDA pin of the touchpad. Pin 10 is connected to the SCL pin of the touchpad. A 4.7k Ohm resistor is connected between both pins. Pin 13 is connected to the TX pin of the Wifi SOC, and pin 14 is connected to the RX of the Wifi SOC. Pin 17 is connected to the Trig Pin of the Sonar Motion Sensor. Pin 18 is connected to the Echo Pin of the Sonar Motion Sensor. Pin 21 is connected to a 4.7k Ohm resistor, which is limiting the current of a Red Led. Pin 22 is connected to the In+ pin of the Class D Audio Amplifier. Pin 26 is connected to IRQ of the Touchpad. Pin 27 is connected to RX of the uLCD. Pin 28 is connected to TX of the uLCD. 
-##Raspberry Pi Pin Connections
+### Mbed LPC1768 Pin Connections
+*<p align="center">![mbed Pin Connections](https://github.com/aivemeyer/4180-project/blob/main/images/mbed-pinout.jpg)<br/>
+Figure 12. Mbed Pinout .</p><br/>*
+As shown in figure 3, our mbed is grounded, and Vout is 3.3 V. Pin 9 of the mbed is connected to the SDA pin of the touchpad. Pin 10 is connected to the SCL pin of the touchpad. A 4.7k Ohm resistor is connected between both pins. Pin 13 is connected to TX of the bluetooth. Pin 14 is connected to RX of the bluetooth. Pin 17 is connected to the Trig Pin of the Sonar Motion Sensor. Pin 18 is connected to the Echo Pin of the Sonar Motion Sensor. Pin 21 is connected to a 4.7k Ohm resistor, which is limiting the current of a Red Led. Pin 22 is connected to the In+ pin of the Class D Audio Amplifier. Pin 26 is connected to IRQ of the Touchpad. Pin 27 is connected to RX of the uLCD. Pin 28 is connected to TX of the uLCD. 
+ 
+### Raspberry Pi 3 Pin Connections
 For the Raspberry Pi 3, the usb connects to the microusb on the mbed. The HDMI on the Raspberry Pi 3 connects to the monitor.  
-##Touchpad Pin Connections
-Figure 13. touchpad-pinout.</p><br/>*
-##Speaker and Class D Audio Amplifier 
-Figure 14. speaker-pinout.</p><br/>*
-### WiFi SOC
-Figure 15. wifi-pinout.</p><br/>*
+ 
+### MPR121 Capacitive Touch Sensor Pin Connections
+*<p align="center">![mbed Pin Connections](https://github.com/aivemeyer/4180-project/blob/main/images/touchpad-pinout.jpg)<br/>
+Figure 13. Touchpad Pinout .</p><br/>*
 
-### Sonar Motion Sensor
-Figure 16. sonar-pinout.</p><br/>*
+### Speaker and Class D Audio Amplifier 
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/speaker-pinout.png)<br/>
+Figure 14. Speaker Pinout.</p><br/>*
+
+### Adafruit Bluefruit LE UART Friend 
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/bluetooth-pinout.png)<br/>
+Figure 15. Bluetooth Pinout.</p><br/>*
+For our project, we used pin 13 and pin 14, respectively instead of pin 27 and pin 28 on the bluetooth. 
+
+### HC-SR04 Sonar Motion Sensor
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/sonar-pinout.png)<br/>
+Figure 16. Sonar Motion Sensor Pinout.</p><br/>*
 For our project, we used pin 17 and pin 18 on the mbed instead of pin 6 and pin 7. 
+
 ### LED
 The shorter leg of the led is grounded. The longer leg is connected to a 4.7K Ohm resistor, which is connected to pin 21 on the mbed. 
-### uLCD
-Figure 17. uLCD-pinout.</p><br/>*
+
+### Pushbutton 
+We are using three pushbuttons. One pushbutton is to rearm it once it is disarmed. The other two push buttons are to increase and decrease the threshold. The first pushbutton is grounded and connected to pin 23 on the mbed. The other two pushbuttons are grounded and connected to pin 24 and pin 25 on the mbed. 
+
+### uLCD-144-G2 Color LCD Pin Connections
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/ulcd-pinout.png)<br/>
+Figure 17. uLCD Pinout.</p><br/>*
+For our project, we used pin 27 and pin 28 instead of pin 9 and pin 10 on the uLCD. 
  
 ## Software Setup
  
