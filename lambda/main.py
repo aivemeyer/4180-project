@@ -32,7 +32,7 @@ def lambda_handler(event, context):
     
     for entry in items: 
         #Will only send email if distance reading is less than or equal to 100
-        if entry['distance'] <= 100:
+        if entry['distance'] <= entry['threshold']:
             try:  # Provide the contents of the email.
                 response = ses.send_email(
                     Destination={
