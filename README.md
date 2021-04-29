@@ -1,5 +1,8 @@
 # 4180 Project - Security System
-By Kenta Xu, Abi Ivemeyer, Nishalini Shanmugan, Seung Wook Jin
+By Kenta Xu, Abi Ivemeyer, Nishalini Shanmugan, Seung Wook Jin <br/>
+[Demo Video](https://youtu.be/9aRg5VaJrIw) <br/>
+[Presentation Video](https://youtu.be/ol8k1U2WAno)
+
 *<p align="center">![Our Entire Setup](https://github.com/aivemeyer/4180-project/blob/main/images/Final.jpg)<br/>
 Figure 1. Our complete setup.</p><br/>*
 
