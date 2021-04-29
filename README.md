@@ -1,6 +1,6 @@
 # 4180 Project - Security System
 By Kenta Xu, Abi Ivemeyer, Nishalini Shanmugan, Seung Wook Jin
-*<p align="center">![Our Entire Setup](https://github.com/aivemeyer/4180-project/blob/main/images/20210427_121204.jpg)<br/>
+*<p align="center">![Our Entire Setup](https://github.com/aivemeyer/4180-project/blob/main/images/Final.jpg)<br/>
 Figure 1. Our complete setup.</p><br/>*
 
 *<p align="center">![Security System Architecture Diagram](https://github.com/aivemeyer/4180-project/blob/main/images/4180Diagram.JPG)<br/>
@@ -10,7 +10,7 @@ Figure 2. Architecture Diagram for Security System.</p><br/>*
 <p> Our project is a security system on a breadboard that will upload data to the cloud. When turned on, the system will be armed with a constant red light. When motion is detected, the alarm will go off and the light will blink, sending an email notification to the user. IT will continue going off until the passcode is correctly entered, in which the sound stops and the light dims. While the system is on, it will be connected to Amazon Web Services and send distance readings. </p>
 
 ## Components 
-### mbed
+### Mbed LPC1768
 *<p align="center">![mbed](https://github.com/aivemeyer/4180-project/blob/main/images/Mbed.jpg)<br/>
 Figure 3. Mbed.</p><br/>*
 [mbed Wiki](https://os.mbed.com/handbook/Homepage)
@@ -20,7 +20,7 @@ Figure 3. Mbed.</p><br/>*
 Figure 4. Raspberry Pi 3.</p><br/>*
 [Raspberry Pi 3 Wiki](http://raspberrypiwiki.com/Raspberry_Pi_3_Model_B_Plus)
 
-### Touchpad
+### MPR121 Capacitive Touch Sensor 
 *<p align="center">![Touchpad](https://github.com/aivemeyer/4180-project/blob/main/images/Touchpad.jpg)<br/>
 Figure 5. Touchpad.</p><br/>*
 [Touchpad Wiki](https://os.mbed.com/users/4180_1/notebook/mpr121-i2c-capacitive-touch-sensor/)
@@ -32,12 +32,12 @@ Figure 5. Speaker.</p><br/>*
 Figure 6. Class D amplifier.</p><br/>*
 [Speaker and Class D Amp Wiki](https://os.mbed.com/users/4180_1/notebook/using-a-speaker-for-audio-output/)
 
-### WiFi SOC
-*<p align="center">![Wifi](https://github.com/aivemeyer/4180-project/blob/main/images/Wifi.jpg)<br/>
-Figure 7. WiFi SOC.</p><br/>*
-[WiFi SOC Wiki](https://os.mbed.com/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/)
+### Pushbutton
+*<p align="center">![Pushbutton](https://github.com/aivemeyer/4180-project/blob/main/images/Pushbutton.jpg)<br/>
+Figure 7. Pushbutton.</p><br/>*
+[Pushbutton Wiki](https://os.mbed.com/users/4180_1/notebook/pushbuttons/)
 
-### Sonar Motion Sensor
+### HC-SR04 Sonar Sensor
 *<p align="center">![Sonar](https://github.com/aivemeyer/4180-project/blob/main/images/Sonar.jpg)<br/>
 Figure 8. Sonar motion sensor.</p><br/>*
 [Sonar Motion Sensor Wiki](https://os.mbed.com/users/4180_1/notebook/using-the-hc-sr04-sonar-sensor/)
@@ -47,7 +47,7 @@ Figure 8. Sonar motion sensor.</p><br/>*
 Figure 9. Red LED light.</p><br/>*
 [LED Wiki](https://os.mbed.com/users/4180_1/notebook/rgb-leds/)
 
-### uLCD
+### uLCD-144-G2 Color LCD
 *<p align="center">![LCD](https://github.com/aivemeyer/4180-project/blob/main/images/LCD.png)<br/>
 Figure 10. uLCD.</p><br/>*
 [uLCD Wiki](https://os.mbed.com/users/4180_1/notebook/ulcd-144-g2-128-by-128-color-lcd/)
@@ -74,7 +74,7 @@ Figure 13. Touchpad Pinout .</p><br/>*
 Figure 14. Speaker Pinout.</p><br/>*
 
 ### Adafruit Bluefruit LE UART Friend 
-*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/bluetooth-pinout.JPG)<br/>
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/bluetooth-pinout.JPGpng)<br/>
 Figure 15. Bluetooth Pinout.</p><br/>*
 For our project, we used pin 13 and pin 14, respectively instead of pin 27 and pin 28 on the bluetooth. 
 
@@ -146,3 +146,14 @@ For our project, we used pin 27 and pin 28 instead of pin 9 and pin 10 on the uL
 ### 2021.4.27
 * Programmed mbed to send distance readings from sonar through serial to Raspberry Pi.
 * Raspberry Pi sends distance data to AWS DynamoDB successfully.
+ 
+### 2021.4.28
+* Fixed bug in 4 pin code for touchpad
+* Previously would disarm as long as pin is pressed in order with any digits in between
+* Added pushbutton to rearm the system after it is disarmed
+* Made alarm only sound when intruder is nearby and armed
+ 
+### 2021.4.29
+* Removed WiFi 
+* Added 2 more pushbuttons feature to increment and decrement alarm threshold
+* Updated setup photo
