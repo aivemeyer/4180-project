@@ -74,7 +74,7 @@ Figure 13. Touchpad Pinout .</p><br/>*
 Figure 14. Speaker Pinout.</p><br/>*
 
 ### Adafruit Bluefruit LE UART Friend 
-*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/bluetooth-pinout.JPGpng)<br/>
+*<p align="center">![5V Source](https://github.com/aivemeyer/4180-project/blob/main/images/bluetooth-pinout.JPG)<br/>
 Figure 15. Bluetooth Pinout.</p><br/>*
 For our project, we used pin 13 and pin 14, respectively instead of pin 27 and pin 28 on the bluetooth. 
 
