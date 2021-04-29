@@ -9,22 +9,28 @@ I2C i2c(p9, p10); // Setup the i2c bus on pins 28 and 27
 Mpr121 mpr121(&i2c, Mpr121::ADD_VSS); // Setup the Mpr121: constructor(i2c object, i2c address of the mpr121)
 PwmOut speaker(p22); // Setup speaker
 uLCD_4DGL uLCD(p28,p27,p29); // Setup uLCD
-Serial blue(p13, p14); //setup bluetooth
 PwmOut red(p21);
 DigitalIn button(p23);
+DigitalIn inc(p24);
+DigitalIn dec(p25);
 
 bool movement = false; //variables for states
 bool armed = true;
+int threshold = 100;
 
 //checks distance from sonar
  void dist(int distance)
 {
     //code to execute when the distance has changed
 //    printf("Distance %d mm\r\n", distance);
-    printf("%d\n", distance);
-    if(distance <=100 && armed){
+    if(distance <=threshold && armed){
         movement = true;
+        printf("%d,%d\n", distance,threshold); //sends to pi only if threshold reached
     }
+    else if (armed){
+        uLCD.color(0x000000);
+        uLCD.printf("INTRUDER"); //clears
+        movement = false;}
 }
 
 ultrasonic mu(p17, p18, .1, 1, &dist);    //Set the trigger pin to p6 and the echo pin to p7
@@ -105,7 +111,6 @@ void Speaker_Function() {
             wait(.15);
             //wait(0.5);;
         }   
-        movement = false;     //this will make the alarm only beep when someone is nearby
     } else {
         speaker = 0;
     }
@@ -125,14 +130,21 @@ void red_led() {
 }
 
 void LCD_status() {
+    uLCD.color(0x00FF00);
+    uLCD.locate(1,2);
+    uLCD.printf("Threshold:%d mm", threshold);
+    uLCD.locate(1,4);
     if (!armed) {
-        uLCD.text_string("DISARMED",1,14, FONT_7X8, 0x00FF00); //green font
+        uLCD.color(0x00FF00);
+        uLCD.printf("DISARMED"); //green font
         //uLCD.text_string("DISARMED",1,14, FONT_7X8, 0x000000); //black font
     } else if (armed && !movement) {
-        uLCD.text_string("ARMED",1,14, FONT_7X8, 0xFFFFFF); //white font
+        uLCD.color(0xFFFFFF);
+        uLCD.printf("ARMED"); //white font
         //uLCD.text_string("ARMED - STAY AWAY",1,14, FONT_7X8, 0x000000); //black font
     } else {
-        uLCD.text_string("INTRUDER",1,14, FONT_7X8, 0xFF0000); //red font
+        uLCD.color(0xFF0000);
+        uLCD.printf("INTRUDER"); //red font
         //uLCD.text_string("INTRUDER",1,14, FONT_7X8, 0x000000); //black font
     }
 }
@@ -144,8 +156,10 @@ void LCD_status() {
 //            if (blue.getc() == '1') { //on button press
 //                if (bnum=='1') { //arms when button 1 is pressed
 //                    armed = true;
+//                    led1 = !led1;
 //                } else if (bnum == '2') { //disarms when button 2 is pressed
 //                    armed = false;
+//                    led1 = !led1;
 //                }
 //            }
 //        }
@@ -157,6 +171,8 @@ int main() {
     //interrupt.fall(&fallInterrupt);
     //interrupt.mode(PullUp);
     button.mode(PullUp);
+    inc.mode(PullUp);
+    dec.mode(PullUp);
     mu.startUpdates();//start measuring the distance
     while(1)
     {
@@ -170,6 +186,8 @@ int main() {
         
         red_led();
         
+        //Bluetooth();
+        
         if(!button && !armed) {   //if button pressed, rearms
             armed = true;
             movement = false; 
@@ -177,7 +195,20 @@ int main() {
             hold1 = 0;
             hold2 = 0;
             hold3 = 0;
-            uLCD.text_string("DISARMED",1,14, FONT_7X8, 0x000000); //black font
+            uLCD.color(0x000000);
+            uLCD.printf("DISARMED"); //clears text
+        }
+        
+        if(!inc && !armed) {
+            if(threshold < 1000) {
+                threshold = threshold + 100;
+            }
+        }
+        
+        if(!dec && !armed) {
+            if(threshold > 100) {
+                threshold = threshold - 100;
+            }
         }
     }
 }
