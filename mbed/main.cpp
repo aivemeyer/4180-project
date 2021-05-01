@@ -23,9 +23,12 @@ int threshold = 100;
 {
     //code to execute when the distance has changed
 //    printf("Distance %d mm\r\n", distance);
+    if(armed){
+        printf("%d,%d\n", distance,threshold); //sends to pi and dynamodb only if armed 
+    }
     if(distance <=threshold && armed){
         movement = true;
-        printf("%d,%d\n", distance,threshold); //sends to pi only if threshold reached
+        
     }
     else if (armed){
         uLCD.color(0x000000);
